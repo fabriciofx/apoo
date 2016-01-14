@@ -14,7 +14,7 @@ public final class ArquivoTexto implements Texto {
 	public String leia() {
 		try {
 			return new String(Files.readAllBytes(arquivo.toPath()), "UTF-8");
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
