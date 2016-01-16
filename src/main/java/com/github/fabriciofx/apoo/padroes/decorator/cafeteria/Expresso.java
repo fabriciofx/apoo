@@ -1,16 +1,22 @@
 package com.github.fabriciofx.apoo.padroes.decorator.cafeteria;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-public final class Expresso implements Produto {
+public final class Expresso implements Cafe {
+	private final Ingrediente ingrediente;
+	
+	public Expresso(final Ingrediente ingrediente) {
+		this.ingrediente = ingrediente;
+	}
+	
 	@Override
 	public double preco() {
-		return 1.50;
+		return ingrediente.preco() + 1.50;
 	}
 
 	@Override
-	public List<String> composicao() {
-		return Arrays.asList("Expresso");
+	public List<Ingrediente> ingredientes() {
+		return null;
 	}
 }

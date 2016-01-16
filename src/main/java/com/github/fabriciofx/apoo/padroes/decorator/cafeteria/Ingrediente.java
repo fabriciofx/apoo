@@ -1,13 +1,16 @@
 package com.github.fabriciofx.apoo.padroes.decorator.cafeteria;
 
-import java.util.List;
-
-public interface Produto {
+public interface Ingrediente {
 	default String nome() {
 		return getClass().getSimpleName();
 	}
 
 	double preco();
 
-	List<String> composicao();
+	final Ingrediente PURO = new Ingrediente() {
+		@Override
+		public double preco() {
+			return 0.0;
+		}
+	};
 }
