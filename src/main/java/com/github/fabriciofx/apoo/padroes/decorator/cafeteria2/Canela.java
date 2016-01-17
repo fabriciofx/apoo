@@ -1,25 +1,19 @@
 package com.github.fabriciofx.apoo.padroes.decorator.cafeteria2;
 
-import java.util.ArrayList;
-import java.util.List;
+public final class Canela implements Ingrediente {
+	private final Ingrediente ingrediente;
 
-public final class Canela implements Produto {
-	private final Produto produto;
-
-	public Canela(final Produto produto) {
-		this.produto = produto;
+	public Canela(final Ingrediente ingrediente) {
+		this.ingrediente = ingrediente;
 	}
 
 	@Override
 	public double preco() {
-		return produto.preco() + 0.30;
+		return ingrediente.preco() + 0.30;
 	}
 
 	@Override
-	public List<String> composicao() {
-		List<String> ingredientes = new ArrayList<>(produto.composicao());
-		ingredientes.add(getClass().getSimpleName());
-
-		return ingredientes;
-	}
+	public Ingrediente ingrediente() {
+		return ingrediente;
+	}	
 }

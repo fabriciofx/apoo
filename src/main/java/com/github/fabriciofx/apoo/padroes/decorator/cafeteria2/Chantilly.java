@@ -1,25 +1,19 @@
 package com.github.fabriciofx.apoo.padroes.decorator.cafeteria2;
 
-import java.util.ArrayList;
-import java.util.List;
+public final class Chantilly implements Ingrediente {
+	private final Ingrediente ingrediente;
 
-public final class Chantilly implements Produto {
-	private final Produto produto;
-
-	public Chantilly(final Produto produto) {
-		this.produto = produto;
+	public Chantilly(final Ingrediente ingrediente) {
+		this.ingrediente = ingrediente;
 	}
 
 	@Override
 	public double preco() {
-		return produto.preco() + 0.50;
+		return ingrediente.preco() + 0.50;
 	}
 
 	@Override
-	public List<String> composicao() {
-		List<String> ingredientes = new ArrayList<>(produto.composicao());
-		ingredientes.add(getClass().getSimpleName());
-
-		return ingredientes;
+	public Ingrediente ingrediente() {
+		return ingrediente;
 	}
 }

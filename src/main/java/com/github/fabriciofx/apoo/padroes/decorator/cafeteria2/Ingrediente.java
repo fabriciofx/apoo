@@ -1,4 +1,4 @@
-package com.github.fabriciofx.apoo.padroes.decorator.cafeteria;
+package com.github.fabriciofx.apoo.padroes.decorator.cafeteria2;
 
 public interface Ingrediente {
 	final Ingrediente PURO = new Ingrediente() {
