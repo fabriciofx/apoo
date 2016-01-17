@@ -11,4 +11,9 @@ public final class Chantilly implements Ingrediente {
 	public double preco() {
 		return ingrediente.preco() + 0.50;
 	}
+
+	@Override
+	public Ingrediente ingrediente() {
+		return ingrediente;
+	}
 }

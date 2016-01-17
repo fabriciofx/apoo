@@ -11,4 +11,9 @@ public final class Chocolate implements Ingrediente {
 	public double preco() {
 		return ingrediente.preco() + 0.70;
 	}
+
+	@Override
+	public Ingrediente ingrediente() {
+		return ingrediente;
+	}
 }

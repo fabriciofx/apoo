@@ -11,4 +11,9 @@ public final class Canela implements Ingrediente {
 	public double preco() {
 		return ingrediente.preco() + 0.30;
 	}
+
+	@Override
+	public Ingrediente ingrediente() {
+		return ingrediente;
+	}	
 }
