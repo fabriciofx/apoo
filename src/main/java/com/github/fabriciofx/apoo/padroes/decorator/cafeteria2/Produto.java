@@ -1,4 +1,4 @@
-package com.github.fabriciofx.apoo.padroes.decorator.cafeteria;
+package com.github.fabriciofx.apoo.padroes.decorator.cafeteria2;
 
 import java.util.List;
 
