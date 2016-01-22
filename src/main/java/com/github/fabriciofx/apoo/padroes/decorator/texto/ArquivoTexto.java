@@ -11,7 +11,7 @@ public final class ArquivoTexto implements Texto {
 	}
 
 	@Override
-	public String leia() {
+	public String conteudo() {
 		try {
 			return new String(Files.readAllBytes(arquivo.toPath()), "UTF-8");
 		} catch (final Exception e) {

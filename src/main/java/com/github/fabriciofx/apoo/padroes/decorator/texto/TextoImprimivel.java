@@ -8,7 +8,7 @@ public final class TextoImprimivel implements Texto {
 	}
 
 	@Override
-	public String leia() {
-		return texto.leia().replaceAll("[^\\p{Print}]", "");
+	public String conteudo() {
+		return texto.conteudo().replaceAll("[^\\p{Print}]", "");
 	}
 }

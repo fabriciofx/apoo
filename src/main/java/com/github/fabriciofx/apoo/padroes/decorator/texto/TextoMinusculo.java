@@ -9,7 +9,7 @@ public final class TextoMinusculo implements Texto {
 	}
 
 	@Override
-	public String leia() {
-		return texto.leia().toLowerCase();
+	public String conteudo() {
+		return texto.conteudo().toLowerCase();
 	}
 }

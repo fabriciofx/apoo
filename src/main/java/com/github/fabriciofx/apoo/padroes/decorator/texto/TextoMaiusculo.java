@@ -9,7 +9,7 @@ public final class TextoMaiusculo implements Texto {
 	}
 
 	@Override
-	public String leia() {
-		return texto.leia().toUpperCase();
+	public String conteudo() {
+		return texto.conteudo().toUpperCase();
 	}
 }

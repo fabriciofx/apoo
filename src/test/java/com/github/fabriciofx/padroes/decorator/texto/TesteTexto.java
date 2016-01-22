@@ -18,7 +18,7 @@ public final class TesteTexto {
 				.getFile();
 		final Texto texto = new TextoMaiusculo(new TextoAparado(
 				new ArquivoTexto(new File(arquivo))));
-		assertEquals(texto.leia(),
+		assertEquals(texto.conteudo(),
 				"FABRÍCIO BARROS CABRAL RUA DO ASQUER 1982 CAPITAL PEDRO DO BÓ");
 	}
 }

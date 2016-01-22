@@ -8,7 +8,7 @@ public final class TextoAparado implements Texto {
 	}
 
 	@Override
-	public String leia() {
-		return texto.leia().trim().replaceAll("\\s+", " ");
+	public String conteudo() {
+		return texto.conteudo().trim().replaceAll("\\s+", " ");
 	}
 }
