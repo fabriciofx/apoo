@@ -6,7 +6,7 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.github.fabriciofx.apoo.padroes.decorator.texto.ArquivoTexto;
+import com.github.fabriciofx.apoo.padroes.decorator.texto.TextoArquivado;
 import com.github.fabriciofx.apoo.padroes.decorator.texto.Texto;
 import com.github.fabriciofx.apoo.padroes.decorator.texto.TextoAparado;
 import com.github.fabriciofx.apoo.padroes.decorator.texto.TextoMaiusculo;
@@ -17,7 +17,7 @@ public final class TesteTexto {
 		final String arquivo = TesteTexto.class.getResource("/texto.txt")
 				.getFile();
 		final Texto texto = new TextoMaiusculo(new TextoAparado(
-				new ArquivoTexto(new File(arquivo))));
+				new TextoArquivado(new File(arquivo))));
 		assertEquals(texto.conteudo(),
 				"FABRÍCIO BARROS CABRAL RUA DO ASQUER 1982 CAPITAL PEDRO DO BÓ");
 	}
