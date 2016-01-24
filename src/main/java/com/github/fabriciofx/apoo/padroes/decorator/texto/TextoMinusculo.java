@@ -1,5 +1,6 @@
 package com.github.fabriciofx.apoo.padroes.decorator.texto;
 
+import java.io.IOException;
 
 public final class TextoMinusculo implements Texto {
 	private final Texto texto;
@@ -9,7 +10,7 @@ public final class TextoMinusculo implements Texto {
 	}
 
 	@Override
-	public String conteudo() {
+	public String conteudo() throws IOException {
 		return texto.conteudo().toLowerCase();
 	}
 }

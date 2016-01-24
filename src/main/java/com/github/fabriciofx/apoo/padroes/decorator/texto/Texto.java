@@ -1,5 +1,7 @@
 package com.github.fabriciofx.apoo.padroes.decorator.texto;
 
+import java.io.IOException;
+
 public interface Texto {
-	public String conteudo();
+	String conteudo() throws IOException;
 }

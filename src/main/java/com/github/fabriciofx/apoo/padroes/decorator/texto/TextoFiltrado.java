@@ -1,5 +1,7 @@
 package com.github.fabriciofx.apoo.padroes.decorator.texto;
 
+import java.io.IOException;
+
 public final class TextoFiltrado implements Texto {
 	private final Texto texto;
 	private final String filtro;
@@ -10,7 +12,7 @@ public final class TextoFiltrado implements Texto {
 	}
 
 	@Override
-	public String conteudo() {
+	public String conteudo() throws IOException {
 		final StringBuilder sb = new StringBuilder();
 		final String[] linhas = texto.conteudo().split(System.lineSeparator());
 
