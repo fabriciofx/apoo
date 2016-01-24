@@ -1,6 +1,7 @@
 package com.github.fabriciofx.apoo.padroes.decorator.texto;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Files;
 
 public final class TextoArquivado implements Texto {
@@ -11,13 +12,11 @@ public final class TextoArquivado implements Texto {
 	}
 
 	@Override
-	public String conteudo() {
+	public String conteudo() throws IOException {
 		try {
 			return new String(Files.readAllBytes(arquivo.toPath()), "UTF-8");
 		} catch (final Exception e) {
-			e.printStackTrace();
+			throw new IOException(e);
 		}
-
-		return new String();
 	}
 }
