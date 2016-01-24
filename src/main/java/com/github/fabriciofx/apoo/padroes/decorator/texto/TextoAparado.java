@@ -9,6 +9,9 @@ public final class TextoAparado implements Texto {
 
 	@Override
 	public String conteudo() {
-		return texto.conteudo().trim().replaceAll("\\s+", " ");
+		return texto.conteudo()
+				.replaceAll("^\\s+|\\s+$|\\s*(" + System.lineSeparator()
+						+ ")\\s*|(\\s)\\s*", "$1$2")
+				.replaceAll("[\\t\\f]+", " ");
 	}
 }
