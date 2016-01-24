@@ -3,6 +3,7 @@ package com.github.fabriciofx.apoo.padroes.decorator.texto;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
+import java.io.IOException;
 
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import com.github.fabriciofx.apoo.padroes.decorator.texto.TextoMaiusculo;
 
 public final class TesteTexto {
 	@Test
-	public void aparadoEMaiusculo() {
+	public void aparadoEMaiusculo() throws IOException {
 		final String arquivo = TesteTexto.class.getResource("/texto.txt")
 				.getFile();
 		final Texto texto = new TextoMaiusculo(
@@ -34,7 +35,7 @@ public final class TesteTexto {
 	}
 
 	@Test
-	public void aparadoMaiusculoEFiltrado() {
+	public void aparadoMaiusculoEFiltrado() throws IOException {
 		final String arquivo = TesteTexto.class.getResource("/texto.txt")
 				.getFile();
 		final Texto texto = new TextoFiltrado(
