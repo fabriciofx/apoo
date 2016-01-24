@@ -1,4 +1,4 @@
-package com.github.fabriciofx.padroes.decorator.texto;
+package com.github.fabriciofx.apoo.padroes.decorator.texto;
 
 import static org.junit.Assert.assertEquals;
 

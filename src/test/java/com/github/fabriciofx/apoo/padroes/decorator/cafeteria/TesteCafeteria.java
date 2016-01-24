@@ -1,4 +1,4 @@
-package com.github.fabriciofx.padroes.decorator.cafeteria;
+package com.github.fabriciofx.apoo.padroes.decorator.cafeteria;
 
 import static org.junit.Assert.assertEquals;
 
