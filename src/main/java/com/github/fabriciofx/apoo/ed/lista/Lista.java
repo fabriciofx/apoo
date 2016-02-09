@@ -24,17 +24,18 @@ public final class Lista<T> {
 	}
 
 	public boolean contem(final Object o) {
-		try {
-			for (No<T> tmp = ultimo;; tmp = tmp.prox()) {
-				final T dado = tmp.dado();
+		int pos = tamanho - 1;
+		for (No<T> tmp = ultimo; pos >= 0; tmp = tmp.prox()) {
+			final T dado = tmp.dado();
 
-				if (dado.equals(o)) {
-					return true;
-				}
+			if (dado.equals(o)) {
+				return true;
 			}
-		} catch (final UnsupportedOperationException e) {
-			return false;
+
+			pos--;
 		}
+
+		return false;
 	}
 
 	public T obtem(final int indice) {
@@ -61,7 +62,7 @@ public final class Lista<T> {
 			if (dado.equals(o)) {
 				return pos;
 			}
-			
+
 			pos--;
 		}
 
