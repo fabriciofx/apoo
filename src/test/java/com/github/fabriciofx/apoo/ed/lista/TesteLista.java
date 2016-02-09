@@ -125,4 +125,17 @@ public final class TesteLista {
 		assertEquals("Maria", lista.obtem(1));
 		assertEquals("Pedro", lista.obtem(0));
 	}
+	
+	@Test
+	public void indices() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+		lista = lista.adiciona("Maria");
+		lista = lista.adiciona("João");
+
+		assertEquals(2, lista.indice("João"));
+		assertEquals(1, lista.indice("Maria"));
+		assertEquals(0, lista.indice("Pedro"));
+		assertEquals(-1, lista.indice("José"));
+	}
 }

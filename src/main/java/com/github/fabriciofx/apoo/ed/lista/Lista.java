@@ -53,6 +53,21 @@ public final class Lista<T> {
 		return tmp.dado();
 	}
 
+	public int indice(final Object o) {
+		int pos = tamanho - 1;
+		for (No<T> tmp = ultimo; pos >= 0; tmp = tmp.prox()) {
+			final T dado = tmp.dado();
+
+			if (dado.equals(o)) {
+				return pos;
+			}
+			
+			pos--;
+		}
+
+		return -1;
+	}
+
 	public int tamanho() {
 		return tamanho;
 	}
