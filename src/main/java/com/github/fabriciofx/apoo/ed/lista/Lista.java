@@ -78,15 +78,16 @@ public final class Lista<T> {
 		final StringBuilder sb = new StringBuilder();
 		sb.append("[");
 
-		try {
-			for (No<T> tmp = ultimo;; tmp = tmp.prox()) {
-				final T dado = tmp.dado();
-				sb.append(dado.toString()).append(",");
-			}
-		} catch (final UnsupportedOperationException e) {
-			return sb.length() > 1
-					? sb.replace(sb.length() - 1, sb.length(), "]").toString()
-					: "[]";
+		int pos = tamanho - 1;
+		for (No<T> tmp = ultimo; pos >= 0; tmp = tmp.prox()) {
+			final T dado = tmp.dado();
+			sb.append(dado.toString()).append(",");
+
+			pos--;
 		}
+
+		return sb.length() > 1
+				? sb.replace(sb.length() - 1, sb.length(), "]").toString()
+				: "[]";
 	}
 }

@@ -12,6 +12,7 @@ public final class TesteLista {
 		Lista<String> lista = new Lista<>();
 
 		assertEquals(0, lista.tamanho());
+		assertEquals("[]", lista.toString());
 	}
 
 	@Test
