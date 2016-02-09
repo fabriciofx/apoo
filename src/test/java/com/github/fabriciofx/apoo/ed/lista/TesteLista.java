@@ -31,4 +31,16 @@ public final class TesteLista {
 		assertEquals(3, lista.tamanho());
 		assertEquals("[João,Maria,Pedro]", lista.toString());
 	}
+	
+	@Test
+	public void limpa() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+		lista = lista.adiciona("Maria");
+		lista = lista.adiciona("João");
+		lista = lista.limpa();
+
+		assertEquals(0, lista.tamanho());
+		assertEquals("[]", lista.toString());
+	}
 }

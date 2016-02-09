@@ -19,6 +19,10 @@ public final class Lista<T> {
 		return new Lista<T>(no, tamanho + 1);
 	}
 
+	public Lista<T> limpa() {
+		return new Lista<T>();
+	}
+
 	public int tamanho() {
 		return tamanho;
 	}
