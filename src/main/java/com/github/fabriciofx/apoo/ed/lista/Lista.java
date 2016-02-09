@@ -2,32 +2,25 @@ package com.github.fabriciofx.apoo.ed.lista;
 
 public final class Lista<T> {
 	private final No<T> ultimo;
+	private final int tamanho;
 
 	public Lista() {
-		this(new No.Vazio<T>());
+		this(new No.Vazio<T>(), 0);
 	}
 
-	public Lista(final No<T> ultimo) {
+	public Lista(final No<T> ultimo, final int tamanho) {
 		this.ultimo = ultimo;
+		this.tamanho = tamanho;
 	}
 
 	public Lista<T> adiciona(final T dado) {
 		final No<T> no = new No.Padrao<>(dado, ultimo);
 
-		return new Lista<T>(no);
+		return new Lista<T>(no, tamanho + 1);
 	}
 
 	public int tamanho() {
-		int tamanho = 0;
-		try {
-			No<T> tmp = ultimo;
-			while (true) {
-				tmp = tmp.prox();
-				tamanho++;
-			}
-		} catch (final UnsupportedOperationException e) {
-			return tamanho;
-		}
+		return tamanho;
 	}
 
 	@Override
@@ -36,7 +29,7 @@ public final class Lista<T> {
 		sb.append("[");
 
 		try {
-			for (No<T> tmp = ultimo; ; tmp = tmp.prox()) {
+			for (No<T> tmp = ultimo;; tmp = tmp.prox()) {
 				final T dado = tmp.dado();
 				sb.append(dado.toString()).append(",");
 			}
