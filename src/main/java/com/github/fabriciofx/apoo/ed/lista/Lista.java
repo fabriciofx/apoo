@@ -36,7 +36,23 @@ public final class Lista<T> {
 			return false;
 		}
 	}
-	
+
+	public T obtem(final int indice) {
+		if (indice < 0 || indice >= tamanho) {
+			throw new IndexOutOfBoundsException();
+		}
+
+		int pos = tamanho - 1;
+		No<T> tmp = ultimo;
+
+		while (pos > indice) {
+			tmp = tmp.prox();
+			pos--;
+		}
+
+		return tmp.dado();
+	}
+
 	public int tamanho() {
 		return tamanho;
 	}

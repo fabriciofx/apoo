@@ -72,4 +72,57 @@ public final class TesteLista {
 		assertTrue(lista.contem("Maria"));
 		assertTrue(lista.contem("João"));
 	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void obtemPosicaoNegativa() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+
+		lista.obtem(-1);
+	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void obtemVazia() {
+		Lista<String> lista = new Lista<>();
+
+		lista.obtem(0);
+	}
+
+	@Test(expected = IndexOutOfBoundsException.class)
+	public void obtemAlemDoMaximo() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+
+		lista.obtem(1);
+	}
+
+	@Test
+	public void obtemPrimeiro() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+
+		assertEquals("Pedro", lista.obtem(0));
+	}
+
+	@Test
+	public void obtemPrimeiroESegundo() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+		lista = lista.adiciona("Maria");
+
+		assertEquals("Maria", lista.obtem(1));
+		assertEquals("Pedro", lista.obtem(0));
+	}
+
+	@Test
+	public void obtemPrimeiroSegundoETerceiro() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+		lista = lista.adiciona("Maria");
+		lista = lista.adiciona("João");
+
+		assertEquals("João", lista.obtem(2));
+		assertEquals("Maria", lista.obtem(1));
+		assertEquals("Pedro", lista.obtem(0));
+	}
 }
