@@ -69,6 +69,10 @@ public final class Lista<T> {
 		return -1;
 	}
 
+	public boolean vazia() {
+		return tamanho == 0;
+	}
+	
 	public int tamanho() {
 		return tamanho;
 	}

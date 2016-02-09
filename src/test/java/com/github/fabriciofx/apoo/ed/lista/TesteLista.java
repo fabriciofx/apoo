@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public final class TesteLista {
 	@Test
-	public void vazia() {
+	public void zero() {
 		Lista<String> lista = new Lista<>();
 
 		assertEquals(0, lista.tamanho());
@@ -138,5 +138,20 @@ public final class TesteLista {
 		assertEquals(1, lista.indice("Maria"));
 		assertEquals(0, lista.indice("Pedro"));
 		assertEquals(-1, lista.indice("José"));
+	}
+	
+	@Test
+	public void vazia() {
+		Lista<String> lista = new Lista<>();
+		
+		assertTrue(lista.vazia());
+	}
+	
+	@Test
+	public void naoVazia() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+		
+		assertFalse(lista.vazia());
 	}
 }
