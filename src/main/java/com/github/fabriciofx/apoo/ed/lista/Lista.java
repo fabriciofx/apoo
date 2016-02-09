@@ -23,6 +23,20 @@ public final class Lista<T> {
 		return new Lista<T>();
 	}
 
+	public boolean contem(final Object o) {
+		try {
+			for (No<T> tmp = ultimo;; tmp = tmp.prox()) {
+				final T dado = tmp.dado();
+
+				if (dado.equals(o)) {
+					return true;
+				}
+			}
+		} catch (final UnsupportedOperationException e) {
+			return false;
+		}
+	}
+	
 	public int tamanho() {
 		return tamanho;
 	}
