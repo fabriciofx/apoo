@@ -73,6 +73,25 @@ public final class Lista<T> {
 		return tamanho == 0;
 	}
 	
+	public Lista<T> remove(final int indice) {
+		if (indice < 0 || indice >= tamanho) {
+			throw new IndexOutOfBoundsException();
+		}
+
+		int pos = tamanho - 1;
+		No<T> anterior = ultimo;
+
+		while (pos > indice + 1) {
+			anterior = anterior.prox();
+			pos--;
+		}
+		
+		Lista<T> novaLista = new Lista<>(anterior.prox().prox(), pos);
+		
+
+		return novaLista;
+	}
+	
 	public int tamanho() {
 		return tamanho;
 	}

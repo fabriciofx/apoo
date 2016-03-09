@@ -154,4 +154,18 @@ public final class TesteLista {
 		
 		assertFalse(lista.vazia());
 	}
+	
+	@Test
+	public void removePorIndice() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+		lista = lista.adiciona("Maria");
+		lista = lista.adiciona("João");
+		
+		lista = lista.remove(1);
+
+		assertEquals(2, lista.tamanho());
+		assertEquals(0, lista.indice("Pedro"));
+		assertEquals(1, lista.indice("João"));
+	}
 }
