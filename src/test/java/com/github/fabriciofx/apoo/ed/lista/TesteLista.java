@@ -156,7 +156,21 @@ public final class TesteLista {
 	}
 	
 	@Test
-	public void removePorIndice() {
+	public void removePorIndiceZero() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+		lista = lista.adiciona("Maria");
+		lista = lista.adiciona("João");
+		
+		lista = lista.remove(0);
+
+		assertEquals(2, lista.tamanho());
+		assertEquals(0, lista.indice("Maria"));
+		assertEquals(1, lista.indice("João"));
+	}
+
+	@Test
+	public void removePorIndiceUm() {
 		Lista<String> lista = new Lista<>();
 		lista = lista.adiciona("Pedro");
 		lista = lista.adiciona("Maria");
@@ -168,4 +182,24 @@ public final class TesteLista {
 		assertEquals(0, lista.indice("Pedro"));
 		assertEquals(1, lista.indice("João"));
 	}
+	
+	@Test
+	public void removePorIndiceDois() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.adiciona("Pedro");
+		lista = lista.adiciona("Maria");
+		lista = lista.adiciona("João");
+		
+		lista = lista.remove(2);
+
+		assertEquals(2, lista.tamanho());
+		assertEquals(0, lista.indice("Pedro"));
+		assertEquals(1, lista.indice("Maria"));
+	}
+	
+	@Test
+	public void removeDeListaVazia() {
+		Lista<String> lista = new Lista<>();
+		lista = lista.remove(0);
+	}	
 }

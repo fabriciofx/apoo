@@ -14,8 +14,7 @@ public final class Lista<T> {
 	}
 
 	public Lista<T> adiciona(final T dado) {
-		final No<T> no = new No.Padrao<>(dado, ultimo);
-
+		final No<T> no = new No.Simples<>(dado, ultimo);
 		return new Lista<T>(no, tamanho + 1);
 	}
 
@@ -23,92 +22,78 @@ public final class Lista<T> {
 		return new Lista<T>();
 	}
 
-	public boolean contem(final Object o) {
-		int pos = tamanho - 1;
-		for (No<T> tmp = ultimo; pos >= 0; tmp = tmp.prox()) {
-			final T dado = tmp.dado();
-
-			if (dado.equals(o)) {
-				return true;
-			}
-
-			pos--;
-		}
-
-		return false;
+	public T primeiro() {
+		return no(0).dado();
+	}
+	
+	public T ultimo() {
+		return ultimo.dado();
 	}
 
-	public T obtem(final int indice) {
-		if (indice < 0 || indice >= tamanho) {
-			throw new IndexOutOfBoundsException();
-		}
-
-		int pos = tamanho - 1;
-		No<T> tmp = ultimo;
-
-		while (pos > indice) {
-			tmp = tmp.prox();
-			pos--;
-		}
-
-		return tmp.dado();
-	}
-
-	public int indice(final Object o) {
-		int pos = tamanho - 1;
-		for (No<T> tmp = ultimo; pos >= 0; tmp = tmp.prox()) {
-			final T dado = tmp.dado();
-
-			if (dado.equals(o)) {
-				return pos;
-			}
-
-			pos--;
-		}
-
-		return -1;
+	public int tamanho() {
+		return tamanho;
 	}
 
 	public boolean vazia() {
 		return tamanho == 0;
 	}
 	
-	public Lista<T> remove(final int indice) {
+	public boolean contem(final Object o) {
+		return indice(o) != -1;
+	}
+	
+	public T obtem(final int indice) {
+		return no(indice).dado();
+	}
+
+	public Lista<T> remove(final Object o) {
+		return remove(indice(o));
+	}
+
+	private No<T> no(final int indice) {
 		if (indice < 0 || indice >= tamanho) {
 			throw new IndexOutOfBoundsException();
 		}
-
-		int pos = tamanho - 1;
-		No<T> anterior = ultimo;
-
-		while (pos > indice + 1) {
-			anterior = anterior.prox();
-			pos--;
+		No<T> tmp = ultimo;
+		for (int pos = tamanho - 1; pos > indice; pos--) {
+			tmp = tmp.prox();			
 		}
-		
-		Lista<T> novaLista = new Lista<>(anterior.prox().prox(), pos);
-		
-
-		return novaLista;
+		return tmp;		
 	}
 	
-	public int tamanho() {
-		return tamanho;
+	public int indice(final Object o) {
+		No<T> tmp = ultimo;
+		for (int pos = tamanho - 1; pos >= 0; pos--) {
+			final T dado = tmp.dado();
+			if (dado.equals(o)) {
+				return pos;
+			}
+			tmp = tmp.prox();
+		}
+		return -1;
+	}
+
+	public Lista<T> remove(final int indice) {
+		Lista<T> novaLista = new Lista<>();
+		for (int pos = 0; pos <= tamanho - 1; pos++) {
+			if (pos == indice) {
+				continue;
+			}
+			final No<T> no = no(pos);
+			novaLista = novaLista.adiciona(no.dado());
+		}
+		return novaLista;
 	}
 
 	@Override
 	public String toString() {
-		final StringBuilder sb = new StringBuilder();
-		sb.append("[");
-
-		int pos = tamanho - 1;
-		for (No<T> tmp = ultimo; pos >= 0; tmp = tmp.prox()) {
+		final StringBuilder sb = new StringBuilder().append("[");
+		No<T> tmp = ultimo;
+		for (int pos = tamanho - 1; pos >= 0; pos--) {
 			final T dado = tmp.dado();
 			sb.append(dado.toString()).append(",");
-
-			pos--;
+			tmp = tmp.prox();
 		}
-
 		return sb.length() > 1
 				? sb.replace(sb.length() - 1, sb.length(), "]").toString()
 				: "[]";

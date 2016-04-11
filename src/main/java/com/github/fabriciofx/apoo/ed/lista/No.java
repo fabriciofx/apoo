@@ -17,11 +17,11 @@ interface No<T> {
 		}
 	}
 
-	final class Padrao<T> implements No<T> {
+	final class Simples<T> implements No<T> {
 		private final T dado;
 		private final No<T> prox;
 
-		public Padrao(final T dado, final No<T> prox) {
+		public Simples(final T dado, final No<T> prox) {
 			this.dado = dado;
 			this.prox = prox;
 		}
