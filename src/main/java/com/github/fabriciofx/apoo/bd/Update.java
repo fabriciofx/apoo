@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public final class Update implements Comando<Void> {
+public final class Update implements Comando<Update> {
 	private final transient Conexao conexao;
 
 	public Update(final Conexao conexao) {
@@ -12,7 +12,7 @@ public final class Update implements Comando<Void> {
 	}
 
 	@Override
-	public Void executa(final String sql, final Object... args)
+	public Update executa(final String sql, final Object... args)
 			throws IOException {
 		try {
 			final PreparedStatement pstmt = conexao.statement(sql);
@@ -23,6 +23,6 @@ public final class Update implements Comando<Void> {
 			throw new IOException(e);
 		}
 
-		return null;
+		return this;
 	}
 }

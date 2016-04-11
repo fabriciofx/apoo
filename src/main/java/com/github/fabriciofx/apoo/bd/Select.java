@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public final class Select implements Comando<List<Map<String, Object>>> {
+public final class Select implements Comando<Dados> {
 	private final transient Conexao conexao;
 
 	public Select(final Conexao conexao) {
@@ -19,16 +19,16 @@ public final class Select implements Comando<List<Map<String, Object>>> {
 	}
 
 	@Override
-	public List<Map<String, Object>> executa(final String sql,
-			final Object... args) throws IOException {
+	public Dados executa(final String sql, final Object... args)
+			throws IOException {
 		try {
 			final PreparedStatement pstmt = conexao.statement(sql);
 			prepare(pstmt, args);
 			final ResultSet rs = pstmt.executeQuery();
-			final List<Map<String, Object>> tabela = tabela(rs);
+			final Dados dados = dados(rs);
 			conexao.efetiva();
 			pstmt.close();
-			return tabela;
+			return dados;
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
@@ -57,8 +57,7 @@ public final class Select implements Comando<List<Map<String, Object>>> {
 		}
 	}
 
-	private List<Map<String, Object>> tabela(final ResultSet rs)
-			throws SQLException {
+	private Dados dados(final ResultSet rs) throws SQLException {
 		final ResultSetMetaData rsmd = rs.getMetaData();
 		final int colunas = rsmd.getColumnCount();
 		final List<Map<String, Object>> tabela = new LinkedList<>();
@@ -70,6 +69,6 @@ public final class Select implements Comando<List<Map<String, Object>>> {
 			}
 			tabela.add(linhas);
 		}
-		return tabela;
+		return new Dados(tabela);
 	}
 }

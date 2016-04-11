@@ -5,7 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public final class Insert implements Comando<Void> {
+public final class Insert implements Comando<Insert> {
 	private final transient Conexao conexao;
 
 	public Insert(final Conexao conexao) {
@@ -13,7 +13,7 @@ public final class Insert implements Comando<Void> {
 	}
 
 	@Override
-	public Void executa(final String sql, final Object... args)
+	public Insert executa(final String sql, final Object... args)
 			throws IOException {
 		try {
 			final PreparedStatement pstmt = conexao.statement(sql);
@@ -24,7 +24,7 @@ public final class Insert implements Comando<Void> {
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
-		return null;
+		return this;
 	}
 
 	private void prepare(final PreparedStatement stmt, final Object... args)
