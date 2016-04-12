@@ -47,7 +47,7 @@ public final class LogBancoDados implements Log {
 		final Dados logs = select.executa("SELECT * FROM log");
 		conexao.fecha();
 		final List<String> mensagens = new LinkedList<>();
-		for (final Object info : logs.todos("info")) {
+		for (final Object info : logs.itens("info")) {
 			mensagens.add(info.toString());
 		}
 		return mensagens;

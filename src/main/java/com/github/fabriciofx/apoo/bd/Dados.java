@@ -11,19 +11,19 @@ public final class Dados {
 		this.tabela = tabela;
 	}
 
-	public Object elemento(final int numero, final String nome) {
+	public Object item(final int numero, final String nome) {
 		return tabela.get(numero).get(nome);
 	}
 
-	public List<Map<String, Object>> todos() {
+	public List<Map<String, Object>> itens() {
 		return tabela;
 	}
 	
-	public List<Object> todos(final String nome) {
-		final List<Object> todos = new LinkedList<>();
+	public List<Object> itens(final String nome) {
+		final List<Object> itens = new LinkedList<>();
 		for (int n = 0; n < tabela.size(); n++) {
-			todos.add(tabela.get(n).get(nome));
+			itens.add(item(n, nome));
 		}
-		return todos;
+		return itens;
 	}
 }

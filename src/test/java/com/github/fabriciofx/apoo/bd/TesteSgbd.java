@@ -54,8 +54,8 @@ public final class TesteSgbd {
 				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))");
 		insert.executa("INSERT INTO log (id, info) VALUES(?, ?)", id, msg);
 		final Dados logs = select.executa("SELECT * FROM log");
-		assertEquals(logs.elemento(0, "id"), id);
-		assertEquals(logs.elemento(0, "info"), msg);
+		assertEquals(logs.item(0, "id"), id);
+		assertEquals(logs.item(0, "info"), msg);
 	}
 
 	@Test
@@ -71,11 +71,11 @@ public final class TesteSgbd {
 		      .executa("INSERT INTO log (id, info) VALUES(?, ?)", id + 1, msg + "1")
 		      .executa("INSERT INTO log (id, info) VALUES(?, ?)", id + 2, msg + "2");
 		final Dados logs = select.executa("SELECT * FROM log");
-		assertEquals(logs.elemento(0, "id"), id);
-		assertEquals(logs.elemento(0, "info"), msg);
-		assertEquals(logs.elemento(1, "id"), id + 1);
-		assertEquals(logs.elemento(1, "info"), msg + "1");
-		assertEquals(logs.elemento(2, "id"), id + 2);
-		assertEquals(logs.elemento(2, "info"), msg + "2");
+		assertEquals(logs.item(0, "id"), id);
+		assertEquals(logs.item(0, "info"), msg);
+		assertEquals(logs.item(1, "id"), id + 1);
+		assertEquals(logs.item(1, "info"), msg + "1");
+		assertEquals(logs.item(2, "id"), id + 2);
+		assertEquals(logs.item(2, "info"), msg + "2");
 	}
 }
