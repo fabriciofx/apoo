@@ -5,7 +5,7 @@ public final class Lista<T> {
 	private final int tamanho;
 
 	public Lista() {
-		this(new No.Vazio<T>(), 0);
+		this(new No.Terminal<T>(), 0);
 	}
 
 	public Lista(final No<T> ultimo, final int tamanho) {

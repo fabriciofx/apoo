@@ -5,7 +5,7 @@ interface No<T> {
 
 	No<T> prox();
 
-	final class Vazio<T> implements No<T> {
+	final class Terminal<T> implements No<T> {
 		@Override
 		public T dado() {
 			throw new UnsupportedOperationException();
