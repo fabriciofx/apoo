@@ -8,16 +8,16 @@ import java.util.List;
 import com.github.fabriciofx.apoo.bd.Conexao;
 import com.github.fabriciofx.apoo.bd.Dados;
 import com.github.fabriciofx.apoo.bd.Insert;
-import com.github.fabriciofx.apoo.bd.SGBD;
+import com.github.fabriciofx.apoo.bd.Sgbd;
 import com.github.fabriciofx.apoo.bd.Select;
 import com.github.fabriciofx.apoo.bd.Update;
 import com.github.fabriciofx.apoo.bd.Usuario;
 
 public final class LogBancoDados implements Log {
 	private final Log origem;
-	private final SGBD sgbd;
+	private final Sgbd sgbd;
 
-	public LogBancoDados(final Log origem, final SGBD sgbd) throws IOException {
+	public LogBancoDados(final Log origem, final Sgbd sgbd) throws IOException {
 		this.origem = origem;
 		this.sgbd = sgbd;
 		final Conexao conexao = new Conexao(sgbd, "logdb",

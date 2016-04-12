@@ -11,7 +11,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-public final class TesteSGBD {
+public final class TesteSgbd {
 	private Conexao conexao;
 
 	@Before

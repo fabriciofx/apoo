@@ -1,6 +1,6 @@
 package com.github.fabriciofx.apoo.bd;
 
-public interface SGBD {
+public interface Sgbd {
 	String driver();
 
 	int porta();

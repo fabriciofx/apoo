@@ -10,7 +10,7 @@ public final class Conexao {
 	private final transient Connection conn;
 	private final transient String url;
 
-	public Conexao(final SGBD sgbd, final String banco, final Usuario usuario)
+	public Conexao(final Sgbd sgbd, final String banco, final Usuario usuario)
 			throws IOException {
 		try {
 			Class.forName(sgbd.driver());

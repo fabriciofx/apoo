@@ -4,7 +4,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-public final class H2 implements SGBD {
+public final class H2 implements Sgbd {
 	private final transient String driver;
 	private final transient int porta;
 
