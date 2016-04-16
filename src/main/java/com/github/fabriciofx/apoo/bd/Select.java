@@ -6,21 +6,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 public final class Select implements Comando<Dados> {
-	private final transient Conexao conexao;
+	private final transient String sql;
+	private final transient Object[] args;
 
-	public Select(final Conexao conexao) {
-		this.conexao = conexao;
+	public Select(final String sql, final Object... args) {
+		this.sql = sql;
+		this.args = Arrays.copyOf(args, args.length);
 	}
 
 	@Override
-	public Dados executa(final String sql, final Object... args)
-			throws IOException {
+	public Dados execute(final Conexao conexao) throws IOException {
 		try {
 			final PreparedStatement pstmt = conexao.statement(sql);
 			prepare(pstmt, args);

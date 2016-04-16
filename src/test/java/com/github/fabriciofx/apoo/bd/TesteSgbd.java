@@ -22,8 +22,7 @@ public final class TesteSgbd {
 	@After
 	public void finaliza() {
 		try {
-			final Update update = new Update(conexao);
-			update.executa("DROP TABLE IF EXISTS log");
+			new Update("DROP TABLE IF EXISTS log").execute(conexao);
 			conexao.fecha();
 		} catch (final IOException e) {
 			e.printStackTrace();
@@ -38,22 +37,22 @@ public final class TesteSgbd {
 
 	@Test
 	public void cria() throws IOException {
-		final Update update = new Update(conexao);
-		update.executa("CREATE TABLE IF NOT EXISTS"
-				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))");
+		new Update("CREATE TABLE IF NOT EXISTS"
+				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))")
+						.execute(conexao);
 	}
 
 	@Test
 	public void insertUm() throws IOException {
 		final long id = new Date().getTime();
 		final String msg = "Uma mensagem de log qualquer";
-		final Update update = new Update(conexao);
-		final Insert insert = new Insert(conexao);
-		final Select select = new Select(conexao);
-		update.executa("CREATE TABLE IF NOT EXISTS"
-				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))");
-		insert.executa("INSERT INTO log (id, info) VALUES(?, ?)", id, msg);
-		final Dados logs = select.executa("SELECT * FROM log");
+		new Update("CREATE TABLE IF NOT EXISTS"
+				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))")
+						.execute(conexao);
+		new Insert("INSERT INTO log (id, info) VALUES(?, ?)", id, msg)
+				.execute(conexao);
+		final Select select = new Select("SELECT * FROM log");
+		final Dados logs = select.execute(conexao);
 		assertEquals(logs.item(0, "id"), id);
 		assertEquals(logs.item(0, "info"), msg);
 	}
@@ -62,15 +61,17 @@ public final class TesteSgbd {
 	public void insertTres() throws IOException {
 		final long id = new Date().getTime();
 		final String msg = "Uma mensagem de log qualquer";
-		final Update update = new Update(conexao);
-		final Insert insert = new Insert(conexao);
-		final Select select = new Select(conexao);
-		update.executa("CREATE TABLE IF NOT EXISTS"
-				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))");
-		insert.executa("INSERT INTO log (id, info) VALUES(?, ?)", id, msg)
-		      .executa("INSERT INTO log (id, info) VALUES(?, ?)", id + 1, msg + "1")
-		      .executa("INSERT INTO log (id, info) VALUES(?, ?)", id + 2, msg + "2");
-		final Dados logs = select.executa("SELECT * FROM log");
+		new Update("CREATE TABLE IF NOT EXISTS"
+				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))")
+						.execute(conexao);
+		new Insert("INSERT INTO log (id, info) VALUES(?, ?)", id, msg)
+				.execute(conexao);
+		new Insert("INSERT INTO log (id, info) VALUES(?, ?)", id + 1, msg + "1")
+				.execute(conexao);
+		new Insert("INSERT INTO log (id, info) VALUES(?, ?)", id + 2, msg + "2")
+				.execute(conexao);
+		final Select select = new Select("SELECT * FROM log");
+		final Dados logs = select.execute(conexao);
 		assertEquals(logs.item(0, "id"), id);
 		assertEquals(logs.item(0, "info"), msg);
 		assertEquals(logs.item(1, "id"), id + 1);

@@ -22,9 +22,9 @@ public final class LogBancoDados implements Log {
 		this.sgbd = sgbd;
 		final Conexao conexao = new Conexao(sgbd, "logdb",
 				new Usuario("sa", ""));
-		final Update update = new Update(conexao);
-		update.executa("CREATE TABLE IF NOT EXISTS"
-				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))");
+		new Update("CREATE TABLE IF NOT EXISTS"
+				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))")
+						.execute(conexao);
 		conexao.fecha();
 	}
 
@@ -43,8 +43,7 @@ public final class LogBancoDados implements Log {
 	public List<String> mensagens() throws IOException {
 		final Conexao conexao = new Conexao(sgbd, "logdb",
 				new Usuario("sa", ""));
-		final Select select = new Select(conexao);
-		final Dados logs = select.executa("SELECT * FROM log");
+		final Dados logs = new Select("SELECT * FROM log").execute(conexao);
 		conexao.fecha();
 		final List<String> mensagens = new LinkedList<>();
 		for (final Object info : logs.itens("info")) {
@@ -57,9 +56,9 @@ public final class LogBancoDados implements Log {
 	public Log salva() throws IOException {
 		final Conexao conexao = new Conexao(sgbd, "logdb",
 				new Usuario("sa", ""));
-		final Insert insert = new Insert(conexao);
-		insert.executa("INSERT INTO log (id, info) VALUES(?, ?)",
-				new Date().getTime(), mensagem());
+		final Insert insert = new Insert(
+				"INSERT INTO log (id, info) VALUES(?, ?)", new Date().getTime(),
+				mensagem()).execute(conexao);
 		conexao.fecha();
 		origem.salva();
 		return this;
