@@ -1,4 +1,4 @@
-package com.github.fabriciofx.apoo.unix.comando;
+package com.github.fabriciofx.apoo.padroes.decorator.comando;
 
 import java.io.IOException;
 import java.nio.file.Files;

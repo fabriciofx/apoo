@@ -1,10 +1,13 @@
-package com.github.fabriciofx.apoo.unix.comando;
+package com.github.fabriciofx.apoo.padroes.decorator.comando;
 
 import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
 import org.junit.Test;
+
+import com.github.fabriciofx.apoo.padroes.decorator.comando.Comando;
+import com.github.fabriciofx.apoo.padroes.decorator.comando.Ls;
 
 public final class TesteLs {
 	@Test
