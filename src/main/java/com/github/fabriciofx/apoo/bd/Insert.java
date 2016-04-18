@@ -4,27 +4,38 @@ import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Arrays;
 
-public final class Insert implements Comando<Void> {
-	private final transient Conexao conexao;
+public final class Insert implements Comando<Insert> {
+	private final transient boolean autocommit;
+	private final transient String sql;
+	private final transient Object[] args;
 
-	public Insert(final Conexao conexao) {
-		this.conexao = conexao;
+	public Insert(final String sql, final Object... args) {
+		this(false, sql, args);
+	}
+
+	public Insert(final boolean autocommit, final String sql,
+			final Object... args) {
+		this.autocommit = autocommit;
+		this.sql = sql;
+		this.args = Arrays.copyOf(args, args.length);
 	}
 
 	@Override
-	public Void executa(final String sql, final Object... args)
-			throws IOException {
+	public Insert execute(final Conexao conexao) throws IOException {
 		try {
 			final PreparedStatement pstmt = conexao.statement(sql);
 			prepare(pstmt, args);
 			pstmt.executeUpdate();
-			conexao.efetiva();
+			if (autocommit) {
+				conexao.efetiva();
+			}
 			pstmt.close();
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
-		return null;
+		return this;
 	}
 
 	private void prepare(final PreparedStatement stmt, final Object... args)

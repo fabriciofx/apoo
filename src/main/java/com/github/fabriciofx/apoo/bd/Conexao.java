@@ -8,11 +8,14 @@ import java.sql.SQLException;
 
 public final class Conexao {
 	private final transient Connection conn;
+	private final transient String url;
 
-	public Conexao(final SGBD sgbd) throws IOException {
+	public Conexao(final Sgbd sgbd, final String banco, final Usuario usuario)
+			throws IOException {
 		try {
 			Class.forName(sgbd.driver());
-			this.conn = connection(sgbd);
+			this.url = sgbd.url(banco);
+			this.conn = connection(this.url, usuario);
 		} catch (final ClassNotFoundException e) {
 			throw new IOException(e);
 		}
@@ -24,6 +27,10 @@ public final class Conexao {
 
 	public void efetiva() throws SQLException {
 		conn.commit();
+	}
+
+	public String url() {
+		return url;
 	}
 
 	public void fecha() throws IOException {
@@ -39,10 +46,11 @@ public final class Conexao {
 		}
 	}
 
-	private Connection connection(final SGBD sgbd) throws IOException {
+	private Connection connection(final String url, final Usuario usuario)
+			throws IOException {
 		try {
-			return DriverManager.getConnection(sgbd.url(),
-					sgbd.bd().usuario().nome(), sgbd.bd().usuario().senha());
+			return DriverManager.getConnection(url, usuario.nome(),
+					usuario.senha());
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
