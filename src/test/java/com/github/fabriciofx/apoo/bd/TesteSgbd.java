@@ -47,10 +47,9 @@ public final class TesteSgbd {
 	public void insertUm() throws IOException {
 		final long id = new Date().getTime();
 		final String msg = "Uma mensagem de log qualquer";
-		new AutoCommit(new Update("CREATE TABLE IF NOT EXISTS"
-				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))"))
-						.execute(conexao);
 		new AutoCommit(
+				new Update("CREATE TABLE IF NOT EXISTS"
+						+ " log(id LONG PRIMARY KEY, info VARCHAR(255))"),
 				new Insert("INSERT INTO log (id, info) VALUES(?, ?)", id, msg))
 						.execute(conexao);
 		final Dados logs = new Select("SELECT * FROM log").execute(conexao);
@@ -62,15 +61,15 @@ public final class TesteSgbd {
 	public void insertTres() throws IOException {
 		final long id = new Date().getTime();
 		final String msg = "Uma mensagem de log qualquer";
-		new Update("CREATE TABLE IF NOT EXISTS"
-				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))")
-						.execute(conexao);
-		new AutoCommit(new Insert("INSERT INTO log (id, info) VALUES(?, ?)",
-				id, msg)).execute(conexao);
-		new AutoCommit(new Insert("INSERT INTO log (id, info) VALUES(?, ?)",
-				id + 1, msg + "1")).execute(conexao);
-		new AutoCommit(new Insert("INSERT INTO log (id, info) VALUES(?, ?)",
-				id + 2, msg + "2")).execute(conexao);
+		new AutoCommit(
+			new Update("CREATE TABLE IF NOT EXISTS"
+					+ " log(id LONG PRIMARY KEY, info VARCHAR(255))"),
+			new Insert("INSERT INTO log (id, info) VALUES(?, ?)", id, msg),
+			new Insert("INSERT INTO log (id, info) VALUES(?, ?)", id + 1,
+					msg + "1"),
+			new Insert("INSERT INTO log (id, info) VALUES(?, ?)", id + 2,
+					msg + "2")
+		).execute(conexao);
 		final Select select = new Select("SELECT * FROM log");
 		final Dados logs = select.execute(conexao);
 		assertEquals(logs.item(0, "id"), id);
