@@ -12,7 +12,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-public final class Select implements Consulta {
+public final class Select implements Consulta<Dados> {
 	private final transient String sql;
 	private final transient Object[] args;
 
