@@ -2,19 +2,25 @@ package com.github.fabriciofx.apoo.bd;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
 
-public final class Transacao {
-	private final transient Conexao conexao;
+public final class Transacao implements Comando<Void> {
+	private final transient List<Comando<?>> comandos;
 
-	public Transacao(final Conexao conexao) {
-		this.conexao = conexao;
+	public Transacao(final Comando<?>... comandos) {
+		this(Arrays.asList(comandos));
 	}
 
-	private void inicio() throws IOException {
+	public Transacao(final List<Comando<?>> comandos) {
+		this.comandos = comandos;
+	}
+
+	private void inicio(final Conexao conexao) throws IOException {
 		new Update("START TRANSACTION").execute(conexao);
 	}
 
-	private void fim() {
+	private void fim(final Conexao conexao) {
 		try {
 			conexao.efetiva();
 		} catch (final SQLException e) {
@@ -22,22 +28,22 @@ public final class Transacao {
 		}
 	}
 
-	private void rollback() throws IOException {
+	private void rollback(final Conexao conexao) throws IOException {
 		new Update("ROLLBACK").execute(conexao);
 	}
 
-	public Transacao com(final Comando<?>... comandos) throws IOException {
+	@Override
+	public Void execute(final Conexao conexao) throws IOException {
 		try {
-			inicio();
+			inicio(conexao);
 			for (final Comando<?> comando : comandos) {
 				comando.execute(conexao);
 			}
 		} catch (final Exception e) {
-			rollback();
+			rollback(conexao);
 		} finally {
-			fim();
+			fim(conexao);
 		}
-
-		return this;
+		return null;
 	}
 }
