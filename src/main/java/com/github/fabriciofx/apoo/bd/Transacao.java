@@ -5,15 +5,15 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-public final class Transacao implements Comando<Void> {
-	private final transient List<Comando<?>> comandos;
+public final class Transacao implements Comando {
+	private final transient List<Alteracao> alteracoes;
 
-	public Transacao(final Comando<?>... comandos) {
-		this(Arrays.asList(comandos));
+	public Transacao(final Alteracao... alteracoes) {
+		this(Arrays.asList(alteracoes));
 	}
 
-	public Transacao(final List<Comando<?>> comandos) {
-		this.comandos = comandos;
+	public Transacao(final List<Alteracao> alteracoes) {
+		this.alteracoes = alteracoes;
 	}
 
 	private void inicio(final Conexao conexao) throws IOException {
@@ -33,17 +33,16 @@ public final class Transacao implements Comando<Void> {
 	}
 
 	@Override
-	public Void execute(final Conexao conexao) throws IOException {
+	public void execute(final Conexao conexao) throws IOException {
 		try {
 			inicio(conexao);
-			for (final Comando<?> comando : comandos) {
-				comando.execute(conexao);
+			for (final Alteracao alteracao : alteracoes) {
+				alteracao.execute(conexao);
 			}
 		} catch (final Exception e) {
 			rollback(conexao);
 		} finally {
 			fim(conexao);
 		}
-		return null;
 	}
 }

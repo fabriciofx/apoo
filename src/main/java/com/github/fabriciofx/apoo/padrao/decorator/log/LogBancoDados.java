@@ -5,11 +5,13 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.github.fabriciofx.apoo.bd.AutoCommit;
+import com.github.fabriciofx.apoo.bd.Comando;
 import com.github.fabriciofx.apoo.bd.Conexao;
 import com.github.fabriciofx.apoo.bd.Dados;
 import com.github.fabriciofx.apoo.bd.Insert;
-import com.github.fabriciofx.apoo.bd.Sgbd;
 import com.github.fabriciofx.apoo.bd.Select;
+import com.github.fabriciofx.apoo.bd.Sgbd;
 import com.github.fabriciofx.apoo.bd.Update;
 import com.github.fabriciofx.apoo.bd.Usuario;
 
@@ -22,9 +24,11 @@ public final class LogBancoDados implements Log {
 		this.sgbd = sgbd;
 		final Conexao conexao = new Conexao(sgbd, "logdb",
 				new Usuario("sa", ""));
-		new Update("CREATE TABLE IF NOT EXISTS"
+		final Comando update = new AutoCommit(
+			new Update("CREATE TABLE IF NOT EXISTS"
 				+ " log(id LONG PRIMARY KEY, info VARCHAR(255))")
-						.execute(conexao);
+		);
+		update.execute(conexao);
 		conexao.fecha();
 	}
 
@@ -58,7 +62,8 @@ public final class LogBancoDados implements Log {
 				new Usuario("sa", ""));
 		final Insert insert = new Insert(
 				"INSERT INTO log (id, info) VALUES(?, ?)", new Date().getTime(),
-				mensagem()).execute(conexao);
+				mensagem());
+		insert.execute(conexao);
 		conexao.fecha();
 		origem.salva();
 		return this;

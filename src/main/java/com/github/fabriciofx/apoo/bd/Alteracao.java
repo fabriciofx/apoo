@@ -3,33 +3,25 @@ package com.github.fabriciofx.apoo.bd;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
-public final class Select implements Consulta {
+public abstract class Alteracao implements Comando {
 	private final transient String sql;
 	private final transient Object[] args;
 
-	public Select(final String sql, final Object... args) {
+	public Alteracao(final String sql, final Object... args) {
 		this.sql = sql;
 		this.args = Arrays.copyOf(args, args.length);
 	}
 
 	@Override
-	public Dados execute(final Conexao conexao) throws IOException {
+	public void execute(final Conexao conexao) throws IOException {
 		try {
 			final PreparedStatement pstmt = conexao.statement(sql);
 			prepare(pstmt, args);
-			final ResultSet rs = pstmt.executeQuery();
-			final Dados dados = dados(rs);
+			pstmt.executeUpdate();
 			pstmt.close();
-			return dados;
 		} catch (final SQLException e) {
 			throw new IOException(e);
 		}
@@ -56,20 +48,5 @@ public final class Select implements Consulta {
 			}
 			++pos;
 		}
-	}
-
-	private Dados dados(final ResultSet rs) throws SQLException {
-		final ResultSetMetaData rsmd = rs.getMetaData();
-		final int colunas = rsmd.getColumnCount();
-		final List<Map<String, Object>> tabela = new LinkedList<>();
-		while (rs.next()) {
-			final Map<String, Object> linhas = new HashMap<>();
-			for (int col = 1; col <= colunas; col++) {
-				linhas.put(rsmd.getColumnName(col).toLowerCase(),
-						rs.getObject(col));
-			}
-			tabela.add(linhas);
-		}
-		return new Dados(tabela);
 	}
 }

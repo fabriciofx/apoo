@@ -12,7 +12,9 @@ public final class TesteTransacao {
 				new Usuario("sa", ""));
 		final Transacao transacao = new Transacao(
 				new Insert("INSERT INTO log (id, info) VALUES(?, ?)",
-						new Date().getTime(), "Mensagem 1"));
+						new Date().getTime(), "Mensagem 1"),
+				new Insert("INSERT INTO log (id, info) VALUES(?, ?)",
+						new Date().getTime(), "Mensagem 2"));
 		transacao.execute(conexao);
 		conexao.fecha();
 	}
