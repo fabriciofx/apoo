@@ -12,4 +12,5 @@ public final class TesteAoQuadrado {
 		final int[] resultado = { 0, 1, 4, 9, 16, 25 };
 		final Sequencia quadrados = new AoQuadrado(new Intervalo(0, 5));
 		assertTrue(Arrays.equals(resultado, quadrados.numeros()));
-	}}
+	}
+}
