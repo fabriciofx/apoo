@@ -1,30 +1,19 @@
 package com.github.fabriciofx.apoo.conditional;
 
-import java.util.concurrent.Callable;
+public final class If<T> implements Expression<T> {
+	private final Condition condition;
+	private final Expression<T> left;
+	private final Expression<T> right;
 
-public final class If {
-	private final boolean condition;
-
-	public If(final boolean condition) {
+	public If(final Condition condition, final Expression<T> left,
+			final Expression<T> right) {
 		this.condition = condition;
+		this.left = left;
+		this.right = right;
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> T isTrue(final Callable<T> callable) throws Exception {
-		return condition ? callable.call() : (T) new Object();
-	}
-
-	public void isTrue(final Runnable runnable) throws Exception {
-		@SuppressWarnings("unused")
-		final int dummy = condition ? new Object() {
-			public int hashCode() {
-				runnable.run();
-				return 0;
-			};
-		}.hashCode() : new Object() {
-			public int hashCode() {
-				return 0;
-			};
-		}.hashCode();
+	@Override
+	public T evaluate() {
+		return condition.evaluate() ? left.evaluate() : right.evaluate();
 	}
 }
