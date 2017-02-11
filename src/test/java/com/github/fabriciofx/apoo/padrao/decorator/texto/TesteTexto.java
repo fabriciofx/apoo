@@ -8,7 +8,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.github.fabriciofx.apoo.padrao.decorator.texto.Texto;
-import com.github.fabriciofx.apoo.padrao.decorator.texto.TextoAparado;
+import com.github.fabriciofx.apoo.padrao.decorator.texto.TextoLimpo;
 import com.github.fabriciofx.apoo.padrao.decorator.texto.TextoArquivado;
 import com.github.fabriciofx.apoo.padrao.decorator.texto.TextoFiltrado;
 import com.github.fabriciofx.apoo.padrao.decorator.texto.TextoMaiusculo;
@@ -25,7 +25,7 @@ public final class TesteTexto {
 	@Test
 	public void aparadoEMaiusculo() throws IOException {
 		final Texto texto = new TextoMaiusculo(
-				new TextoAparado(
+				new TextoLimpo(
 						new Texto.Simples(TEXTO)
 				)
 		);
@@ -41,7 +41,7 @@ public final class TesteTexto {
 	public void aparadoMaiusculoEFiltrado() throws IOException {
 		final Texto texto = new TextoFiltrado(
 				new TextoMaiusculo(
-						new TextoAparado(
+						new TextoLimpo(
 								new Texto.Simples(TEXTO)
 						)
 				),
@@ -54,7 +54,7 @@ public final class TesteTexto {
 	@Test
 	public void aparadoEMaiusculoDoArquivo() throws IOException {
 		final Texto texto = new TextoMaiusculo(
-				new TextoAparado(
+				new TextoLimpo(
 						new TextoArquivado(
 								new File(ARQUIVO)
 						)
@@ -72,7 +72,7 @@ public final class TesteTexto {
 	public void aparadoMaiusculoEFiltradoDoArquivo() throws IOException {
 		final Texto texto = new TextoFiltrado(
 				new TextoMaiusculo(
-						new TextoAparado(
+						new TextoLimpo(
 								new TextoArquivado(
 										new File(ARQUIVO)
 								)

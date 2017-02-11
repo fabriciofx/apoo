@@ -2,10 +2,10 @@ package com.github.fabriciofx.apoo.padrao.decorator.texto;
 
 import java.io.IOException;
 
-public final class TextoAparado implements Texto {
+public final class TextoLimpo implements Texto {
 	private final Texto texto;
 
-	public TextoAparado(final Texto texto) {
+	public TextoLimpo(final Texto texto) {
 		this.texto = texto;
 	}
 
