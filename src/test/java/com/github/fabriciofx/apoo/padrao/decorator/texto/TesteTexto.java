@@ -26,7 +26,7 @@ public final class TesteTexto {
 	public void aparadoEMaiusculo() throws IOException {
 		final Texto texto = new TextoMaiusculo(
 				new TextoLimpo(
-						new Texto.Simples(TEXTO)
+						new TextoSimples(TEXTO)
 				)
 		);
 		
@@ -42,7 +42,7 @@ public final class TesteTexto {
 		final Texto texto = new TextoFiltrado(
 				new TextoMaiusculo(
 						new TextoLimpo(
-								new Texto.Simples(TEXTO)
+								new TextoSimples(TEXTO)
 						)
 				),
 				".*PEDRO.*"
