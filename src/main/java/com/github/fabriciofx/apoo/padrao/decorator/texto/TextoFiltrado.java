@@ -15,13 +15,11 @@ public final class TextoFiltrado implements Texto {
 	public String conteudo() throws IOException {
 		final StringBuilder sb = new StringBuilder();
 		final String[] linhas = texto.conteudo().split(System.lineSeparator());
-
 		for (final String linha : linhas) {
 			if (linha.matches(filtro)) {
 				sb.append(linha);
 			}
 		}
-
 		return sb.toString();
 	}
 }

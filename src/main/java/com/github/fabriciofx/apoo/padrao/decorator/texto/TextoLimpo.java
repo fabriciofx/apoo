@@ -11,9 +11,12 @@ public final class TextoLimpo implements Texto {
 
 	@Override
 	public String conteudo() throws IOException {
+		final String eol = System.lineSeparator();
 		return texto.conteudo()
-				.replaceAll("^\\s+|\\s+$|\\s*(" + System.lineSeparator()
-						+ ")\\s*|(\\s)\\s*", "$1$2")
-				.replaceAll("[\\t\\f]+", " ");
+			.replaceAll(
+				String.format("^\\s+|\\s+$|\\s*(%s)\\s*|(\\s)\\s*", eol),
+				"$1$2"
+			)
+			.replaceAll("[\\t\\f]+", " ");
 	}
 }
